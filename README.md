@@ -1,7 +1,5 @@
 # hopa
-A static HTML/Javascript homepage
-
- ... to keep links to favorite sites organized.
+A static HTML/Javascript homepage to keep links to favorite sites organized.
 
 You can add a site
 
