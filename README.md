@@ -5,6 +5,8 @@ You can add a site
 
 ![new game](https://github.com/danielefdf/hopa/blob/main/docs/newsite.gif)
 
+(If the site does not have an icon reachable as favicon.ico, you can set the initial letter as the icon.)
+
 Or a new group
 
 ![new game](https://github.com/danielefdf/hopa/blob/main/docs/newgroup.gif)
