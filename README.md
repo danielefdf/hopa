@@ -1,6 +1,8 @@
 # hopa
 A static HTML/Javascript homepage to keep links to favorite sites organized.
 
+EDIT: now available in dark mode!
+
 You can add a site
 
 ![new game](https://github.com/danielefdf/hopa/blob/main/docs/newsite.gif)
