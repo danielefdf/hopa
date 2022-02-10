@@ -1,0 +1,601 @@
+:root {
+    --main-invisible-color: #21222400;
+    --main-bkgd-color: #212224;
+    --main-text-color: white;
+    --main-text-shadow-color: #212224;
+    --main-highlight-1-bkgd-color: #404048;
+    --main-highlight-2-bkgd-color: #818284;
+    --main-button-text-color: #06b87c;  /* a blueish green */
+    --main-semitransp-bkgd-color: #000000A0;
+    --main-border-radius: 4px;
+    --main-transition: all 0.4s ease-out 0s;
+    --maintile-text-color: #f1f2f4;
+    --acc-state-col-width: 17px;
+    --site-link-col-width: 200px;  /* includes padding */
+    --site-icon-width: 20px;
+    --site-icon-height: 20px;
+    --site-url-text-color: #919294;
+    --action-button-edge: 18px;
+    --action-button-text-color: #818284;
+    --acc-state-aft-bkgd-color: #f1f2f4;
+    --accpnl-sel-bkgd-color: #111214;
+    --focus-border: 1px solid #AAAAAA;
+    --focus-transition: all 0.2s ease-out 0s;
+}
+
+body {
+                                                /* size */
+    height: 400px;  /* window for sticky positioning */
+                                                /* shape */
+    background-color: var(--main-bkgd-color);
+    overflow-y: scroll;
+                                                /* spacing */
+    margin: 0;
+}
+
+/*
+ * main button model: features shared by all buttons
+ */
+
+.main-button {
+                                                /* size */
+    width: 100%;
+                                                /* shape */
+    background-color: var(--main-bkgd-color);
+    border: 1px solid var(--main-bkgd-color);
+    outline: none;  /* prevents tab default highlighting */
+                                                /* spacing */
+    padding: 6px;
+                                                /* text */
+    color: var(--main-button-text-color);
+    font: bold 17px/17px "Calibri";
+    text-align: left;
+                                                /* cursor */
+    cursor: pointer;
+    pointer-events: auto;
+                                                /* transition */
+    transition: var(--main-transition);
+}
+.main-button:hover {
+                                                /* shape */
+    background-color: var(--main-highlight-1-bkgd-color);
+    border: 1px solid var(--main-highlight-1-bkgd-color);
+}
+.main-button:focus {
+                                                /* shape */
+    border: var(--focus-border);
+                                                /* transition */
+    transition: var(--focus-transition);
+}
+
+/*
+ * action button model: features of "add", "edit", "cancel", "grab" buttons
+ */
+
+.action-button {
+    display: block;
+                                                /* position */
+    position: relative;
+                                                /* size */
+    width: var(--action-button-edge);
+    height: var(--action-button-edge);
+                                                /* shape */
+    opacity: 0;
+    border: none;
+    border-radius: 50%;"
+                                                /* spacing */
+    padding: 0px;
+                                                /* text */
+    font: bold 16px/16px "Calibri";
+    color: var(--action-button-text-color);
+                                                /* transition */
+    transition: var(--main-transition);
+}
+.action-button:hover {
+                                                /* shape */
+    background-color: var(--main-highlight-2-bkgd-color);
+    opacity: 1;
+                                                /* text */
+    color: var(--main-text-color);
+                                                /* transition */
+    transition: var(--main-transition);
+}
+.action-button-text {
+                                                /* position */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.grab-button-text {
+                                                /* spacing */
+    padding-top: 1px;
+    padding-right: 1px;
+                                                /* text */
+    font: bold 14px/14px "Calibri";
+                                                /* cursor */
+    cursor: grab;
+}
+.edit-button-text {
+                                                /* spacing */
+    padding-right: 2px;
+                                                /* text */
+    font: bold 12px/12px "Calibri";
+}
+.delete-button-text {
+                                                /* text */
+    font: bold 16px/16px "Calibri";
+}
+
+/*
+ * queued element: features shared by "ALL" div, accordions and empty divs
+ */
+
+.queued-element {
+                                                /* size */
+    width: 100%;
+                                                /* position */
+    position: absolute;
+    top: 0px;
+                                                /* transition */
+    transition: var(--main-transition);
+}
+
+/*
+ * "ALL" div: contains the "ALL" button
+ */
+
+.all-div {
+                                                /* layout */
+    z-index: 2;
+                                                /* position */
+    position: sticky;
+    top: 0;
+}
+
+/*
+ * all-button: the "ALL" button, that can open and close all accordions
+ */
+
+.all-button {}
+
+/*
+ * acc-div: accordion. Contains a button and a panel
+ */
+
+.acc-div {
+                                                /* size */
+    max-height: 1000px;
+                                                /* shape */
+    background-color: var(--main-bkgd-color);
+    overflow: hidden;
+                                                /* transition */
+    transition: var(--main-transition);
+}
+
+/*
+ * acc-button: button of the accordion
+ */
+
+.acc-button {
+                                                /* layout */
+    display: grid;
+    grid-template-columns: var(--acc-state-col-width)
+                           auto
+                           var(--action-button-edge)
+                           var(--action-button-edge)
+                           var(--action-button-edge);
+    grid-gap: 6px;
+                                                /* spacing */
+    padding: 6px;
+                                                /* text */
+}
+.acc-button-label {
+    font-style: italic;
+}
+.acc-button-action {}
+.acc-button:hover > .acc-button-action {
+                                                /* shape */
+    opacity: 1;
+}
+.ACC_BUTTON_REQUEST_ADD {}  /* flag tag */
+.ACC_BUTTON_REQUEST_EDIT {}  /* flag tag */
+.ACC_BUTTON_TO_EDIT {}  /* flag tag */
+
+/*
+ * acc-state: contains a triangular char that rotates to show if the accordion is open (v) or closed (>)
+ */
+
+.acc-state {}
+.acc-button:hover > .acc-state:after {
+                                                /* shape */
+    opacity: 1;
+}
+.acc-state:after {
+                                                /* position */
+    float: left;
+                                                /* shape */
+    opacity: 0;
+                                                /* text */
+    font-style: normal;
+    text-indent: 0px;
+    color: var(--acc-state-aft-bkgd-color);
+                                                /* content */
+    content: "\25B8";
+                                                /* transition */
+    transition: var(--main-transition);
+}
+.acc-state-open {}
+.acc-state-open:after {
+                                                /* transform */
+    transform: rotate(90deg);
+    transform-origin: 50% 50%;
+                                                /* transition */
+    transition: var(--main-transition);
+}
+
+/*
+ * add tab div: "add tab" button
+ */
+
+.add-tab-div {}
+.add-tab-button {
+                                                /* text */
+    text-indent: 23px;  /* --acc-state-col-width + padding */
+}
+
+/*
+ * acc-panel: panel of the accordion
+ */
+
+.acc-panel {
+                                                /* size */
+    max-height: 0px;
+                                                /* layout */
+    display: grid;
+    grid-template-columns: var(--site-link-col-width)
+                           auto
+                           50px;
+                                                /* spacing */
+    padding: 6px;
+                                                /* transition */
+    transition: var(--main-transition);
+}
+.acc-panel-selected {
+                                                /* shape */
+    background-color: var(--accpnl-sel-bkgd-color);
+}
+
+.SITE-PANEL-ACTIVE {}  /* flag tag: to record on which panel you are adding a link */
+
+/*
+ * main-tile: features shared by links and "add site" buttons
+ */
+
+.main-tile {
+                                                /* shape */
+    background-color: var(--main-bkgd-color);
+    outline: none;
+    border: 1px solid var(--main-bkgd-color);
+    border-radius: var(--main-border-radius);
+    box-shadow: 1px 1px 2px var(--main-highlight-1-bkgd-color);
+    overflow: hidden;
+                                                /* spacing */
+    padding: 6px;
+                                                /* text */
+    text-decoration: none;  /* prevents underline */
+    color: var(--maintile-text-color);
+                                                /* transition */
+    transition: var(--main-transition);
+}
+.main-tile:hover {
+                                                /* shape */
+    background-color: var(--main-highlight-1-bkgd-color);
+}
+.main-tile:focus {
+                                                /* shape */
+    border: var(--focus-border);
+}
+.main-tile-disabled {
+                                                /* shape */
+    background-color: var(--main-highlight-1-bkgd-color);
+                                                /* cursor */
+    pointer-events: none;
+}
+
+.SITE_DIV_REQUEST_ADD {}  /* flag tag */
+.SITE_DIV_REQUEST_EDIT {}  /* flag tag */
+
+/*
+ * site-link: link to site
+ */
+.site-link {
+                                                /* position */
+    position: absolute;
+                                                /* size */
+    height: 48px;
+                                                /* layout */
+    z-index: 0;
+    display: grid;
+    grid-template-columns: var(--site-icon-width)
+                           88px
+                           var(--action-button-edge)
+                           var(--action-button-edge)
+                           var(--action-button-edge);
+    grid-gap: 6px;
+}
+.SITE_LINK_A_TO_EDIT {}  /* flag tag */
+.site-icon-link {
+                                                /* layout */
+    display: block;
+                                                /* position */
+    float: left;
+                                                /* size */
+    width: var(--site-icon-width);
+    height: var(--site-icon-height);
+                                                /* shape */
+    border-radius: var(--main-border-radius);
+    overflow: hidden;
+                                                /* spacing */
+    margin: auto;
+}
+.site-icon-init {
+                                                /* size */
+    width: var(--site-icon-width);
+    height: var(--site-icon-height);
+                                                /* shape */
+    border-radius: 30%;
+                                                /* spacing */
+    padding-top: 4px;
+                                                /* text */
+    font: bold 16px/16px "Calibri";
+    color: var(--main-text-color);
+    text-shadow: 1px 1px 2px var(--main-text-shadow-color);
+    text-overflow: ellipsis;
+    text-align: center;
+
+    white-space: nowrap;
+    overflow: hidden;
+}
+.site-name {
+                                                /* spacing */
+    padding: 5px 0px 0px 6px;
+                                                /* text */
+    font: 16px/16px "Calibri";
+}
+.main-tile:hover > .site-name {
+                                                /* size */
+    min-width: 0;
+                                                /* text*/
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.site-url {
+                                                /* layout */
+    grid-column: 1 / span 4;
+                                                /* size */
+    width: 0%;
+                                                /* shape */
+    opacity: 0;
+    border: none;
+                                                /* spacing */
+    padding: 3px;
+                                                /* text */
+    font: 11px/11px "Microsoft Sans Serif";
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--site-url-text-color);
+                                                /* transition */
+    transition: var(--main-transition);
+}
+.site-link:hover > .site-url {
+                                                /* size */
+    width: 100%;
+                                                /* shape */
+    opacity: 1;
+}
+.site-link-action {}
+.site-link:hover > .site-link-action {
+                                                /* shape */
+    opacity: 1;
+}
+
+/*
+ * add-site-div: the add site button
+ */
+.add-site-div {
+                                                /* size */
+    width: 32px;
+    height: 32px;
+                                                /* spacing */
+    padding: 0px;  /* prevents inherited padding */
+}
+.add-site-div-icon {
+                                                /* size */
+    width: 100%;
+                                                /* spacing */
+    padding: 7px 0px 0px 11px;
+                                                /* text */
+    color: var(--main-button-text-color);
+}
+
+/*
+ * dragging
+ */
+
+.element-dragged {
+                                                /* layout */
+    z-index: 2;
+                                                /* shape */
+    background-color: var(--main-highlight-2-bkgd-color);
+    opacity: 0.5;
+                                                /* cursor */
+    cursor: grab;
+}
+.element-swapped {
+                                                /* shape */
+    background-color: var(--main-highlight-2-bkgd-color);
+    opacity: 0.5;
+                                                /* transition */
+    transition: var(--main-transition);
+}
+
+/*
+ * empty div
+ */
+
+.empty-div {
+                                                /* shape */
+    background-color: var(--main-bkgd-color);
+}
+
+/*
+ * modals
+ */
+
+.modal {
+                                                /* layout */
+    display: none;
+    z-index: 3;
+                                                /* position */
+    position: fixed;
+    left: 0;
+    top: 0;
+                                                /* size */
+    width: 100%;
+    height: 100%;
+                                                /* shape */
+    background-color: var(--main-semitransp-bkgd-color);
+    overflow: auto;
+                                                /* spacing */
+    padding-top: 60px;
+}
+
+.modal-content {
+                                                /* size */
+    width: 400px;
+                                                /* shape */
+    background-color: var(--main-bkgd-color);
+                                                /* spacing */
+    margin: 5% auto 15% auto;
+    padding: 16px;
+}
+
+.modal-input {
+                                                /* layout */
+    display: inline-block;
+                                                /* size */
+    width: 100%;
+    box-sizing: border-box;
+                                                /* shape */
+    border: 1px solid var(--main-invisible-color);
+    border-bottom: 1px solid var(--main-highlight-1-bkgd-color);
+    outline: none;
+                                                /* spacing */
+    margin: 8px 0;
+    padding: 12px 12px;
+}
+.modal-input:focus {
+                                                /* shape */
+    border: var(--focus-border);
+                                                /* transition */
+    transition: var(--focus-transition);
+}
+.modal-radio-container {
+                                                /* layout */
+    display: grid;
+    grid-template-columns: 40px auto;
+                                                /* shape */
+    border: 1px solid var(--main-invisible-color);
+    border-bottom: 1px solid var(--main-highlight-1-bkgd-color);
+    outline: none;
+                                                /* spacing */
+    padding: 6px 6px;
+}
+.modal-radio-container:focus {
+                                                /* shape */
+    border: var(--focus-border);
+                                                /* transition */
+    transition: var(--focus-transition);
+}
+.modal-radio {
+                                                /* size */
+    height: 20px;
+                                                /* shape */
+    border: 1px solid var(--main-invisible-color);
+    border-bottom: 1px solid var(--main-highlight-1-bkgd-color);
+    outline: none;
+}
+.modal-radio:focus {
+                                                /* shape */
+    outline-width: 20px;
+    outline: 1px solid var(--main-highlight-1-bkgd-color);
+                                                /* transition */
+    transition: var(--focus-transition);
+}
+.modal-radio-label {
+                                                /* size */
+    width: 86px;
+    height: 32px;
+                                                /* spacing */
+    margin: 4px;
+                                                /* text */
+    font: bold 16px/16px "Calibri";
+    color: var(--main-highlight-2-bkgd-color);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.modal-close {
+                                                /* spacing */
+    padding-bottom: 8px;
+                                                /* text */
+    font-size: 25px;
+    text-align: right;
+}
+
+.modal-animate {
+    -webkit-animation: animatezoom 0.4s;
+    animation: animatezoom 0.4s;
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)}
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

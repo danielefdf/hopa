@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="hopa.css">
+</head>
+<body>
+
+    <!-- The only elements defined statically are the modals: add-site-modal and add-tab-modal. -->
+    <!-- The same modals are called for edit functions. -->
+
+    <div id="add-site-modal" class="modal">
+        <form class="modal-content modal-animate" action="" method="post">
+            <!-- type="button" necessary, otherwise with "enter" it closes the form -->
+            <button class="main-button modal-close" type="button">
+                &times;
+            </button>
+            <input class="modal-input" name="site-name" type="text" placeholder="site name"
+                    required autocomplete="off"
+                    tabindex="1">
+            <input class="modal-input" name="site-url" type="url" placeholder="site url"
+                    required autocomplete="off"
+                    tabindex="2">
+            <div class="modal-radio-container"
+                    tabindex="3">
+                <input class="modal-radio" name="site-icon-choice" type="radio"
+                        id="link" value="link"
+                        required
+                        tabindex="4">
+                <label class="main-button main-tile modal-radio-label" for="link">
+                </label>
+                <input class="modal-radio" name="site-icon-choice" type="radio"
+                        id="init" value="init"
+                        required
+                        tabindex="4">
+                <label class="main-button main-tile modal-radio-label" for="init">
+                </label>
+            </div>
+            <button class="main-button" name="site-ok" type="submit"
+                    tabindex="5">
+                OK
+            </button>
+        </form>
+    </div>
+
+    <div id="add-tab-modal" class="modal">
+        <form class="modal-content modal-animate" action="" method="post">
+            <!-- type="button" necessary, otherwise with "enter" it closes the form -->
+            <button class="main-button modal-close" type="button">
+                &times;
+            </button>
+            <input class="modal-input" name="tab-name" type="text" placeholder="tab name"
+                    required autocomplete="off"
+                    tabindex="1">
+            <button class="main-button" name="tab-ok" type="submit"
+                    tabindex="2">
+                OK
+            </button>
+        </form>
+    </div>
+
+    <script src="hopa.js"></script>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
